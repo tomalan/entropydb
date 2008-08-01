@@ -37,9 +37,9 @@ An object can be stored in the database by calling the method _store:_ of _EXCon
 
 The following restrictions apply:
   * Only descendants of _NSObject_ can be stored.
-  * Class attributes of the following primitive types are stored: _int, long, char, short, long long, float, double_.
-  * Class attributes which are instances of objects are expected to have their retain count equal to 1.
-  * Attributes of superclasses are not stored.
+  * Instance variables of the following primitive types are stored: _int, long, char, short, long long, float, double_.
+  * Instance variables which are instances of objects are expected to have their retain count equal to 1.
+  * Instance variables of superclasses are not stored.
 
 == Querying objects from the database ==
 
@@ -63,3 +63,5 @@ One can loaded all objects the conform to a certain condition by using the metho
 			// processing the object
 		}
 }}}
+
+In the current preview version, there is only one predicate class, namely _ EXPredicateEqualText_, which can be used to load objects with a certain string value in an instance variable of type _NSString_ (as shown in the above code example).
