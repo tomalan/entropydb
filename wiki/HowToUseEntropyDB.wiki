@@ -64,4 +64,4 @@ One can load all objects of a certain class that conform to a certain condition 
 		}
 }}}
 
-In the current preview version, there is only one predicate class, namely _ EXPredicateEqualText_, that can be used to load objects with a certain string value in an instance variable of type _NSString_ (as shown in the above code example).
+In the current preview version, there are only two predicate classes, namely _ EXPredicateEqualText_ and _EXPredicateEqualInt64_, that can be used to load objects with a certain string value or a long long integer value, respectively, in an instance variable of type _NSString_/_long long_ (as shown in the above code example).
