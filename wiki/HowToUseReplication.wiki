@@ -3,6 +3,6 @@
 
 With *EntropyDB*, you can replicate data between database instances automatically. For example, one instance can be on a mobile device and another one on a desktop computer. The replication mechanism ensures that the contents of the database is synchronized all the time.
 
-If you would like an instance of _EXContainer_ to provide its contents to other database instances over the Internet, you must use the method _allowSynchronizationOnPort:_. Typically, this primary database instance will be running on a server with a permanent network connection.
+If you would like an instance of _EXContainer_ to provide its contents to other database instances over the Internet, you must use the method _allowSynchronizationOnPort:_ (typically, this primary database instance will be running on a server with a permanent network connection).
 
-A local database instance of _EXContainer_ can synchronize its contents with a server database instance by using the method _synchronizeWithPort:host:_.
+A local database instance of _EXContainer_ (typically on a mobile device) can synchronize its contents with a server database instance by using the method _synchronizeWithPort:host:_.
