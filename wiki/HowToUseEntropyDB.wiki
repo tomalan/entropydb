@@ -1,6 +1,42 @@
 #summary Sample code of using EntropyDB
 #labels Featured,Phase-Implementation
 
-= Introduction =
+== Introduction ==
 
-Add your content here.
+This document contains code examples that explain how to use *EntropyDB* for persistency of objects.
+
+== Opening a database ==
+
+The following piece of code opens the database in a file called _test.db_ in the default document directory of the current iPhone application. The database file is created if it does not exist.
+
+{{{
+		NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString* documentsDirectory = [paths objectAtIndex: 0];
+		NSString* dbFileName = [documentsDirectory stringByAppendingFormat: @"/test.db"];
+		EXFile* file = [EXFile fileWithName: dbFileName];
+		EXContainer* container = [[EXContainer alloc] initWithFile: file];
+}}}
+
+== Closing a database ==
+
+A database is closed by releasing the instance of _EXContainer_.
+
+{{{
+		[container release];
+}}}
+
+== Storing an object in the database ==
+
+An object can be stored in the database by calling the method _store_ of _EXContainer_.
+
+{{{
+		id customObject = [[CustomObject alloc] init];
+		[container store: customObject];
+		[customObject release];
+}}}
+
+The following restrictions apply:
+
+* Only descendants of _NSObject_ can be stored.
+
+* Class attributes of the following primitive types are stored: _int, long, char, short, long long, float, double_.
