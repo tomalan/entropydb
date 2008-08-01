@@ -39,7 +39,6 @@ The following restrictions apply:
   * Only descendants of _NSObject_ can be stored.
   * Instance variables of the following primitive types are stored: _int, long, char, short, long long, float, double_.
   * Instance variables which are instances of objects are expected to have their retain count equal to 1.
-  * Instance variables of superclasses are not stored.
   * You cannot store object hierarchies with reference cycles.
 
 == Querying objects from a database ==
