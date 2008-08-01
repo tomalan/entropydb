@@ -27,7 +27,7 @@ A database is closed by releasing the instance of _EXContainer_.
 
 == Storing an object in the database ==
 
-An object can be stored in the database by calling the method _store_ of _EXContainer_.
+An object can be stored in the database by calling the method _store:_ of _EXContainer_.
 
 {{{
 		id customObject = [[CustomObject alloc] init];
@@ -36,7 +36,30 @@ An object can be stored in the database by calling the method _store_ of _EXCont
 }}}
 
 The following restrictions apply:
+  * Only descendants of _NSObject_ can be stored.
+  * Class attributes of the following primitive types are stored: _int, long, char, short, long long, float, double_.
+  * Class attributes which are instances of objects are expected to have their retain count equal to 1.
+  * Attributes of superclasses are not stored.
 
-* Only descendants of _NSObject_ can be stored.
+== Querying objects from the database ==
 
-* Class attributes of the following primitive types are stored: _int, long, char, short, long long, float, double_.
+All objects of a certain class can be loaded from the database by using the method _queryWithClass:_.
+
+{{{
+		NSArray* resultSet = [container queryWithClass: [CustomObject class]];
+		for (id object in resultSet) {
+			// processing the object
+		}
+}}}
+
+The result set is autoreleased.
+
+One can loaded all objects the conform to a certain condition by using the method _queryWithClass:predicate:_.
+
+{{{
+		EXPredicate* predicate = [[[EXPredicateEqualText alloc] initWithFieldName: @"company" value: @"Apple, Inc."] autorelease];
+		NSArray* resultSet = [container queryWithClass: [CustomObject class] predicate: predicate];
+		for (id object in resultSet) {
+			// processing the object
+		}
+}}}
