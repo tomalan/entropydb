@@ -54,7 +54,7 @@ All objects of a certain class can be loaded from the database by using the meth
 
 The result set is autoreleased.
 
-One can loaded all objects the conform to a certain condition by using the method _queryWithClass:predicate:_.
+One can load all objects of a certain class that conform to a certain condition by using the method _queryWithClass:predicate:_.
 
 {{{
 		EXPredicate* predicate = [[[EXPredicateEqualText alloc] initWithFieldName: @"company" value: @"Apple, Inc."] autorelease];
@@ -64,4 +64,4 @@ One can loaded all objects the conform to a certain condition by using the metho
 		}
 }}}
 
-In the current preview version, there is only one predicate class, namely _ EXPredicateEqualText_, which can be used to load objects with a certain string value in an instance variable of type _NSString_ (as shown in the above code example).
+In the current preview version, there is only one predicate class, namely _ EXPredicateEqualText_, that can be used to load objects with a certain string value in an instance variable of type _NSString_ (as shown in the above code example).
