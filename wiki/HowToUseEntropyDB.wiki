@@ -25,7 +25,7 @@ A database is closed by releasing the instance of _EXContainer_.
 		[container release];
 }}}
 
-== Storing an object in the database ==
+== Storing an object in a database ==
 
 An object can be stored in the database by calling the method _store:_ of _EXContainer_.
 
@@ -41,7 +41,7 @@ The following restrictions apply:
   * Instance variables which are instances of objects are expected to have their retain count equal to 1.
   * Instance variables of superclasses are not stored.
 
-== Querying objects from the database ==
+== Querying objects from a database ==
 
 All objects of a certain class can be loaded from the database by using the method _queryWithClass:_.
 
