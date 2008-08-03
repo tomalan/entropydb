@@ -31,7 +31,7 @@ An object can be stored in the database by calling the method _store:_ of _EXCon
 
 {{{
 		id customObject = [[CustomObject alloc] init];
-		[container store: customObject];
+		[container storeObject: customObject];
 		[customObject release];
 }}}
 
