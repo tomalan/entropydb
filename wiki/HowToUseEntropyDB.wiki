@@ -37,6 +37,7 @@ An object can be stored in the database by calling the method _store:_ of _EXCon
 
 The following restrictions apply:
   * Only descendants of _NSObject_ can be stored.
+  * One cannot store instances of Cocoa classes directly. Collections (_NSArray_, _NSSet_, _NSDictionary_) can be used if they are instance variables of custom objects.
   * Instance variables of the following primitive types are stored: _int, long, char, short, long long, float, double_.
   * Instance variables which are instances of objects are expected to have their retain count equal to 1.
   * You cannot store object hierarchies with reference cycles.
