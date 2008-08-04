@@ -64,4 +64,6 @@ One can load all objects of a certain class that conform to a certain condition 
 		}
 }}}
 
-In the current preview version, there are only two predicate classes, namely _ EXPredicateEqualText_ and _EXPredicateEqualInt64_, that can be used to load objects with a certain string value or a long long integer value, respectively, in an instance variable of type _NSString_/_long long_ (as shown in the above code example).
+If a predicate operates with an atomic value, the query is optimized (the index for the field defined in the predicate is used) which makes queries significantly faster. Unoptimized queries will instantiate all objects of the queried type and the they will be filtered according to the predicate's expression.
+
+In the current preview version, there are only three predicate classes, namely _ EXPredicateEqualText_, _EXPredicateEqualInt_ and _EXPredicateEqualInt64_, that can be used to load objects with a certain string value, an integer value or a long long integer value, respectively, in an instance variable of type _NSString_/_int_/_long long_ (as shown in the above code example).
