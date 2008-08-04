@@ -67,3 +67,20 @@ One can load all objects of a certain class that conform to a certain condition 
 If a predicate operates with an atomic value, the query is optimized (the index for the field defined in the predicate is used) which makes queries significantly faster. Unoptimized queries will instantiate all objects of the queried type and then they will be filtered according to the predicate's expression.
 
 In the current preview version, there are only three predicate classes, namely _ EXPredicateEqualText_, _EXPredicateEqualInt_ and _EXPredicateEqualInt64_, that can be used to load objects with a certain string value, an integer value or a long long integer value, respectively, in an instance variable of type _NSString_/_int_/_long long_ (as shown in the above code example).
+
+== Transactions ==
+
+Each method that modifies the database is performed within a separate transaction by default. If there are many updates to be done, it is significantly faster to perform them within one transaction. The following code sample exemplifies this:
+
+{{{
+	EXTransaction* transaction = [container transaction];
+	@try {
+		for (id object in objects) [transaction storeObject: object];
+		[transaction commit];
+	} @catch (NSException* exception) {
+		[transaction rollback];
+		NSLog(@"exception: %@", exception);
+	}
+}}}
+
+The transaction object is autoreleased and it retains the container.
