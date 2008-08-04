@@ -24,7 +24,7 @@ To create a client socket, use:
 	if ([socket connect: host port: port] == NO) { [socket release]; NSLog(@"cannot create socket"); }
 }}}
 
-If the socket is created successfully, you can send and receive atomic values and objects:
+If the socket has been created successfully, you can send and receive atomic values and objects:
 
 {{{
 	id object = [socket readObject];
