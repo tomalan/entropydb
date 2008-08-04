@@ -1,8 +1,6 @@
 #summary Was ist Entropy
 #labels Featured,Phase-Implementation
 
-== Vorbemerkungen ==
-
 *Entropy* ist eine in Objective-C geschriebene Objektdatenbank, die unter OS X und auf dem iPhone bzw. iPod touch läuft. Die Persistenz ist transparent, ObjC-Objekte werden vor dem Speichern automatisch zerlegt und bei Abfragen nach Bedarf wieder zusammengestellt.
 
 *Entropy* bringt folgende Vorteile:
