@@ -67,6 +67,8 @@ One can load all objects of a certain class that conform to a certain condition 
 
 If a predicate operates with an atomic value, the query is optimized (the index for the field defined in the predicate is used) which makes queries significantly faster. Unoptimized queries will instantiate all objects of the queried type and then they will be filtered according to the predicate's expression.
 
+*NB:* If you load an object from the database, potential referenced objects will not be loaded (instantiated) until you access them directly by sending a message. Untouched referenced objects will not be stored while the enclosing object being stored recursively. This strategy (lazy loading) allows for having complex object graph and storing only changed parts of it instead of all accessible objects.
+
 In the current preview version, there are only three predicate classes, namely _ EXPredicateEqualText_, _EXPredicateEqualInt_ and _EXPredicateEqualInt64_, that can be used to load objects with a certain string value, an integer value or a long long integer value, respectively, in an instance variable of type _NSString_/_int_/_long long_ (as shown in the above code example).
 
 == Transactions ==
