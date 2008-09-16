@@ -27,7 +27,7 @@ A database is closed by releasing the instance of _EXContainer_.
 
 == Storing an object in a database ==
 
-An object can be stored in the database by calling the method _store:_ of _EXContainer_.
+An object can be stored in the database by calling the method _storeObject:_ of _EXContainer_.
 
 {{{
 		id customObject = [[CustomObject alloc] init];
