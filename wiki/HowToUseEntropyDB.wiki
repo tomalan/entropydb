@@ -25,6 +25,8 @@ A database is closed by releasing the instance of _EXContainer_.
 		[container release];
 }}}
 
+Instances of _EXContainer_ should not be autoreleased.
+
 == Storing an object in a database ==
 
 An object can be stored in the database by calling the method _storeObject:_ of _EXContainer_.
