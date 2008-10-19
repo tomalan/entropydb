@@ -31,4 +31,4 @@ If the socket has been created successfully, you can send and receive atomic val
 	[socket sendObject: object];
 }}}
 
-Sent/received objects must support serialization, i.e., _encodeWithCoder:_ and _initWithCoder:_ must be supported.
+Sent/received objects must conform to _NSCoding_, i.e., they have to respond to _encodeWithCoder:_ and _initWithCoder:_.
