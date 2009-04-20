@@ -2,7 +2,7 @@
 //  EXContainer.h
 //  Entropy
 //  (C) 2007-2009 Codesign
-//  Licensed under GPLv3
+//  Licensed under LGPL (as of version 1.1)
 //
 
 #import <Foundation/Foundation.h>
@@ -26,6 +26,7 @@
 	NSString* uniqueIdentifier;
 	id delegate;
 	NSTimer* drainTimer;
+	BOOL transactionInProgress;
 }
 
 // public methods
@@ -47,6 +48,7 @@
 - (void)synchronizeWithPort:(int)port host:(NSString*)host;
 - (id)delegate;
 - (void)setDelegate:(id)_delegate;
+- (BOOL)isTransactionInProgress;
 
 // private methods
 

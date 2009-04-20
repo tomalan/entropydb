@@ -1,9 +1,8 @@
 //
 //  EXMessageRelay.m
-//  CRo
-//
-//  Created by Petr Homola on 10.09.08.
-//  Copyright 2008 Univerzita Karlova. All rights reserved.
+//  Entropy
+//  (C) 2007-2009 Codesign
+//  Licensed under LGPL (as of version 1.1)
 //
 
 #import "EXMessageRelay.h"

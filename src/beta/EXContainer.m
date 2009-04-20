@@ -2,7 +2,7 @@
 //  EXContainer.m
 //  Entropy
 //  (C) 2007-2009 Codesign
-//  Licensed under GPLv3
+//  Licensed under LGPL (as of version 1.1)
 //
 
 #import "EXContainer.h"
@@ -85,6 +85,10 @@
 - (EXTransaction*)transactionWithTimeout:(NSTimeInterval)timeout {
 	[self autoreleaseDrainer];
 	return [[[EXTransaction alloc] initWithContainer: self timeout: timeout] autorelease];
+}
+
+- (BOOL)isTransactionInProgress {
+	return transactionInProgress;
 }
 
 - (int)storeObject:(id)object {
@@ -788,9 +792,11 @@
 
 - (void)lockForTransaction {
 	[transactionLock lock];
+	transactionInProgress = YES;
 }
 
 - (void)unlockForTransaction {
+	transactionInProgress = NO;
 	[transactionLock unlock];
 }
 

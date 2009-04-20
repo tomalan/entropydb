@@ -2,7 +2,7 @@
 //  EXSyncInMessageObject.m
 //  Entropy
 //  (C) 2007-2009 Codesign
-//  Licensed under GPLv3
+//  Licensed under LGPL (as of version 1.1)
 //
 
 #import "EXSyncInMessageObject.h"

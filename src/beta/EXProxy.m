@@ -2,7 +2,7 @@
 //  EXProxy.m
 //  Entropy
 //  (C) 2007-2009 Codesign
-//  Licensed under GPLv3
+//  Licensed under LGPL (as of version 1.1)
 //
 
 #import "EXProxy.h"
@@ -24,11 +24,12 @@
 
 - (id)__object {
 	if (object == nil) {
-		NSNumber* key = [NSNumber numberWithInt: objectID];
+		//NSNumber* key = [NSNumber numberWithInt: objectID];
 		//object = [loadedObjects objectForKey: key]; // causes an infinite loop
 		//if (object == nil) {
-			object = [container queryWithID: objectID atomically: YES retrievedObjects: loadedObjects lazyLoading: NO];
-			[loadedObjects setObject: object forKey: key]; // probably not necessary but avoids forwarding
+			object = [[container queryWithID: objectID atomically: ![container isTransactionInProgress]
+						   retrievedObjects: [NSMutableDictionary dictionary] lazyLoading: YES] retain];
+			//[loadedObjects setObject: object forKey: key]; // probably not necessary but avoids forwarding
 		//}
 	}
 	return object;
@@ -40,7 +41,8 @@
 
 - (NSString*)description {
 	id _object = [self __object];
-	return [_object description];
+	NSString* desc = [_object description];
+	return desc; //[NSString stringWithFormat: @"(proxy) %@", desc];
 }
 
 - (BOOL)isKindOfClass:(Class)cls {
