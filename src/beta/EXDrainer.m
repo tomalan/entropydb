@@ -22,9 +22,10 @@
 	active = NO;
 }
 
-- (void)autorelease {
+- (id)autorelease {
 	[super autorelease];
 	autoreleased = YES;
+	return self;
 }
 
 - (BOOL)isAutoreleased {

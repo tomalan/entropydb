@@ -32,6 +32,7 @@
 // public methods
 
 - (id)initWithFile:(EXFile*)file;
+- (id)initWithDocumentFile:(NSString*)file;
 - (int)storeObject:(id)object;
 - (int)storeObject:(id)object asNew:(BOOL)asNew;
 - (NSArray*)queryWithClass:(Class)cls;

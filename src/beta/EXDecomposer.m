@@ -47,6 +47,15 @@
 			int value = sqlite3_column_int(stmt, 0);
 			sqlite3_finalize(stmt);
 			*(int*)((void*)object + ivar_getOffset(ivar)) = value;
+		} else if ([type isEqual: @"I"]) {
+			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			unsigned int value = sqlite3_column_int(stmt, 0);
+			sqlite3_finalize(stmt);
+			*(unsigned int*)((void*)object + ivar_getOffset(ivar)) = value;
 		} else if ([type isEqual: @"l"]) {
 			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
@@ -56,6 +65,15 @@
 			long value = sqlite3_column_int(stmt, 0);
 			sqlite3_finalize(stmt);
 			*(long*)((void*)object + ivar_getOffset(ivar)) = value;
+		} else if ([type isEqual: @"L"]) {
+			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			unsigned long value = sqlite3_column_int(stmt, 0);
+			sqlite3_finalize(stmt);
+			*(unsigned long*)((void*)object + ivar_getOffset(ivar)) = value;
 		} else if ([type isEqual: @"c"]) {
 			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
@@ -65,6 +83,15 @@
 			signed char value = sqlite3_column_int(stmt, 0);
 			sqlite3_finalize(stmt);
 			*(signed char*)((void*)object + ivar_getOffset(ivar)) = value;
+		} else if ([type isEqual: @"C"]) {
+			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			unsigned char value = sqlite3_column_int(stmt, 0);
+			sqlite3_finalize(stmt);
+			*(unsigned char*)((void*)object + ivar_getOffset(ivar)) = value;
 		} else if ([type isEqual: @"s"]) {
 			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
@@ -74,6 +101,15 @@
 			short value = sqlite3_column_int(stmt, 0);
 			sqlite3_finalize(stmt);
 			*(short*)((void*)object + ivar_getOffset(ivar)) = value;
+		} else if ([type isEqual: @"S"]) {
+			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			unsigned short value = sqlite3_column_int(stmt, 0);
+			sqlite3_finalize(stmt);
+			*(unsigned short*)((void*)object + ivar_getOffset(ivar)) = value;
 		} else if ([type isEqual: @"q"]) {
 			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
@@ -84,6 +120,16 @@
 			sqlite3_finalize(stmt);
 			//NSLog(@"##### OK %d", ivar_getOffset(ivar));
 			*(long long*)((void*)object + ivar_getOffset(ivar)) = value;
+		} else if ([type isEqual: @"Q"]) {
+			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			unsigned long long value = sqlite3_column_int64(stmt, 0);
+			sqlite3_finalize(stmt);
+			//NSLog(@"##### OK %d", ivar_getOffset(ivar));
+			*(unsigned long long*)((void*)object + ivar_getOffset(ivar)) = value;
 		} else if ([type isEqual: @"f"]) {
 			rc = sqlite3_prepare_v2(db, "SELECT value FROM propertyvalues_integer WHERE vid = ? AND name = ? AND oid = ?", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
@@ -233,8 +279,38 @@
 			sqlite3_bind_int(stmt, 4, [objectID intValue]);
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
+		} else if ([type isEqual: @"I"]) {
+			unsigned int value = *(unsigned int*)((void*)object + ivar_getOffset(*ivar));
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'i', ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertyvalues_integer (vid, name, value, oid) VALUES (?, ?, ?, ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, value);
+			sqlite3_bind_int(stmt, 4, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
 		} else if ([type isEqual: @"l"]) {
 			long value = *(long*)((void*)object + ivar_getOffset(*ivar));
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'l', ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertyvalues_integer (vid, name, value, oid) VALUES (?, ?, ?, ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, value);
+			sqlite3_bind_int(stmt, 4, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+		} else if ([type isEqual: @"L"]) {
+			unsigned long value = *(unsigned long*)((void*)object + ivar_getOffset(*ivar));
 			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'l', ?)", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
 			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
@@ -263,6 +339,21 @@
 			sqlite3_bind_int(stmt, 4, [objectID intValue]);
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
+		} else if ([type isEqual: @"C"]) {
+			unsigned char value = *(unsigned char*)((void*)object + ivar_getOffset(*ivar));
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'c', ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertyvalues_integer (vid, name, value, oid) VALUES (?, ?, ?, ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, value);
+			sqlite3_bind_int(stmt, 4, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
 		} else if ([type isEqual: @"s"]) {
 			short value = *(short*)((void*)object + ivar_getOffset(*ivar));
 			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 's', ?)", -1, &stmt, 0);
@@ -278,8 +369,38 @@
 			sqlite3_bind_int(stmt, 4, [objectID intValue]);
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
+		} else if ([type isEqual: @"S"]) {
+			unsigned short value = *(unsigned short*)((void*)object + ivar_getOffset(*ivar));
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 's', ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertyvalues_integer (vid, name, value, oid) VALUES (?, ?, ?, ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, value);
+			sqlite3_bind_int(stmt, 4, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
 		} else if ([type isEqual: @"q"]) {
 			long long value = *(long long*)((void*)object + ivar_getOffset(*ivar));
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'q', ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int(stmt, 3, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+			rc = sqlite3_prepare_v2(db, "INSERT INTO propertyvalues_integer (vid, name, value, oid) VALUES (?, ?, ?, ?)", -1, &stmt, 0);
+			sqlite3_bind_int(stmt, 1, versionID);
+			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
+			sqlite3_bind_int64(stmt, 3, value);
+			sqlite3_bind_int(stmt, 4, [objectID intValue]);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+		} else if ([type isEqual: @"Q"]) {
+			unsigned long long value = *(unsigned long long*)((void*)object + ivar_getOffset(*ivar));
 			rc = sqlite3_prepare_v2(db, "INSERT INTO propertytypes (vid, name, type, oid) VALUES (?, ?, 'q', ?)", -1, &stmt, 0);
 			sqlite3_bind_int(stmt, 1, versionID);
 			sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_STATIC);
