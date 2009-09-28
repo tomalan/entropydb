@@ -1,6 +1,8 @@
 #summary How to use blocks in queries (in OS X 10.6)
 #labels Featured
 
+*Please check out the latest changes from the SVN repository*
+
 Let's declare a simple entity class:
 
 {{{
