@@ -532,6 +532,17 @@
 	return [self queryWithClass: cls predicate: predicate lazyLoading: NO];
 }
 
+#ifdef __BLOCKS__
+- (NSArray*)queryWithClass:(Class)cls condition:(BOOL(^)(id))block {
+	NSMutableArray* filteredObjects = [NSMutableArray array];
+	NSArray* _objects = [self queryWithClass: cls];
+	for (id obj in _objects) {
+		if (block(obj) == YES) [filteredObjects addObject: obj];
+	}
+	return filteredObjects;
+}
+#endif
+
 - (NSArray*)queryWithClass:(Class)cls predicate:(EXPredicate*)predicate lazyLoading:(BOOL)lazyLoading {
 	NSMutableDictionary* retrievedObjects = [[NSMutableDictionary alloc] init];
 	NSArray* result = [self queryWithClass: cls predicate: predicate atomically: YES retrievedObjects: retrievedObjects lazyLoading: lazyLoading];
