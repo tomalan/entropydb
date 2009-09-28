@@ -39,6 +39,9 @@
 - (NSArray*)queryWithClass:(Class)cls lazyLoading:(BOOL)lazyLoading;
 - (id)queryForSingletonWithClass:(Class)cls allocAndInitIfNotExists:(BOOL)allocAndInitIfNotExists;
 - (NSArray*)queryWithClass:(Class)cls predicate:(EXPredicate*)predicate;
+#ifdef __BLOCKS__
+- (NSArray*)queryWithClass:(Class)cls condition:(BOOL(^)(id))block;
+#endif
 - (NSArray*)queryWithClass:(Class)cls predicate:(EXPredicate*)predicate lazyLoading:(BOOL)lazyLoading;
 - (id)queryWithID:(int)_objectID;
 - (id)queryWithID:(int)_objectID lazyLoading:(BOOL)lazyLoading;
@@ -50,7 +53,7 @@
 - (id)delegate;
 - (void)setDelegate:(id)_delegate;
 - (BOOL)isTransactionInProgress;
-
+												 
 // private methods
 
 - (void)postMessage:(EXMessage*)message toHost:(NSString*)host port:(int)port;
