@@ -33,6 +33,14 @@
 	srandomdev();
 }
 
+- (id)initWithDocumentFile:(NSString*)file {
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex: 0];
+	file = [@"/" stringByAppendingString: file];
+	NSString* fileName = [documentsDirectory stringByAppendingString: file];
+	return [[EXContainer alloc] initWithFile: [EXFile fileWithName: fileName]];
+}
+
 - (id)initWithFile:(EXFile*)file {
 	if (self = [super init]) {
 		int rc = sqlite3_open([[file fileName] UTF8String], &db);
