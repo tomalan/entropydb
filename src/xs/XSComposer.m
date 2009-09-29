@@ -84,6 +84,16 @@
 							}
 							[value addObject: obj];
 						}
+					} else if ([value isKindOfClass: [NSSet class]]) {
+						NSSet* oldSet = value;
+						value = [NSMutableSet setWithCapacity: [oldSet count]];
+						for (id obj in oldSet) {
+							if ([obj isKindOfClass: [XSObjectReference class]]) {
+								NSNumber* key = [NSNumber numberWithInt: [obj refID]];
+								obj = [embeddedObjects objectForKey: key];
+							}
+							[value addObject: obj];
+						}
 					}
 					object_setIvar(obj, *ivar, [value retain]);
 				} else {

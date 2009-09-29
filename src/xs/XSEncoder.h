@@ -34,6 +34,7 @@
 - (void)encodeStringProperty:(NSString*)text;
 - (void)encodeNilProperty;
 - (void)encodeArrayProperty:(NSArray*)array;
+- (void)encodeSetProperty:(NSSet*)set;
 - (void)encodeEmbeddedObject:(id)object;
 - (void)startEncoding;
 - (void)finishEncoding;

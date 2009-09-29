@@ -57,6 +57,8 @@
 
 - (void)encodeArrayProperty:(NSArray*)array { }
 
+- (void)encodeSetProperty:(NSSet*)set { }
+
 - (void)encodeEmbeddedObject:(id)object { }
 
 - (XSDecomposer*)decomposer {
