@@ -1,9 +1,8 @@
 //
 //  XSXMLDecoder.h
-//  test
-//
-//  Created by Petr Homola on 29.9.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  XS package (serializer)
+//  (C) 2007-2009 Codesign
+//  Licensed under LGPL (v3)
 //
 
 #import <Cocoa/Cocoa.h>
