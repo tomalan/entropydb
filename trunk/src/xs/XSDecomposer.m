@@ -80,7 +80,7 @@
 		free(firstIvar);
 		cls = [cls superclass];
 	}
-	[encoder finishObject: obj];
+	[encoder finishObject];
 }
 
 @end

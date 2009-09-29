@@ -32,6 +32,14 @@
 	return [XMLAsString writeToFile: path atomically: YES encoding: NSUTF8StringEncoding error: &error];
 }
 
++ (id)deserializeObjectFromXMLFile:(NSString*)path {
+	NSError* error;
+	NSString* XMLString = [NSString stringWithContentsOfFile: path encoding: NSUTF8StringEncoding error: &error];
+	if (XMLString != nil) return [self deserializeObjectFromXMLString: XMLString];
+	else return nil;
+	
+}
+
 + (id)deserializeObjectFromXMLString:(NSString*)XMLAsString {
 	EXXMLParser* parser = [[[EXXMLParser alloc] initWithString: XMLAsString] autorelease];
 	if ([parser succeeded] == YES) {

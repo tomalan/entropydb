@@ -27,7 +27,7 @@
 
 - (void)startObject:(id)obj { }
 
-- (void)finishObject:(id)obj { }
+- (void)finishObject { }
 
 - (void)startEncoding { }
 

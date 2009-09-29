@@ -21,7 +21,7 @@
 - (id)initWithEncodingAttributes:(NSDictionary*)_attributes;
 + (id)XMLEncoderWithEncodingAttributes:(NSDictionary*)_attributes;
 - (void)startObject:(id)obj;
-- (void)finishObject:(id)obj;
+- (void)finishObject;
 - (void)startProperty:(NSString*)name;
 - (void)finishProperty;
 - (void)encodeIntProperty:(int)n;
