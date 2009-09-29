@@ -33,6 +33,18 @@
 
 - (int)decodeIntProperty:(NSString*)name { return 0; }
 
+- (long)decodeLongProperty:(NSString*)name { return 0; }
+
+- (short)decodeShortProperty:(NSString*)name { return 0; }
+
+- (char)decodeCharProperty:(NSString*)name { return 0; }
+
+- (long long)decodeLongLongProperty:(NSString*)name { return 0; }
+
+- (float)decodeFloatProperty:(NSString*)name { return 0; }
+
+- (double)decodeDoubleProperty:(NSString*)name { return 0; }
+
 - (id)decodeObjectProperty:(NSString*)name { return nil; }
 
 - (void)dealloc {

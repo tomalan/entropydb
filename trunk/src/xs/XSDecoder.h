@@ -23,6 +23,12 @@
 - (int)objectID;
 - (NSString*)objectClassName;
 - (int)decodeIntProperty:(NSString*)name;
+- (long)decodeLongProperty:(NSString*)name;
+- (short)decodeShortProperty:(NSString*)name;
+- (char)decodeCharProperty:(NSString*)name;
+- (long long)decodeLongLongProperty:(NSString*)name;
+- (float)decodeFloatProperty:(NSString*)name;
+- (double)decodeDoubleProperty:(NSString*)name;
 - (id)decodeObjectProperty:(NSString*)name;
 
 @end
