@@ -91,6 +91,20 @@
 	}
 }
 
+- (void)encodeSetProperty:(NSSet*)set {
+	[[self XMLString] appendFormat: @"type=\"set\" mutable=\"%d\">\n", [set isKindOfClass: [NSMutableSet class]]];
+	for (id object in set) {
+		NSValue* key = [NSValue valueWithPointer: object];
+		NSNumber* refID = [embeddedObjects objectForKey: key];
+		if (refID == nil) {
+			[embeddedObjects setObject: [NSNumber numberWithInt: nextFreeObjectID] forKey: key];
+			[[self decomposer] decomposeObject: object encoder: self];
+		} else {
+			[[self XMLString] appendFormat: @"<XSObject refID=\"%@\"/>\n", refID];
+		}
+	}
+}
+
 - (void)encodeEmbeddedObject:(id)object {
 	NSValue* key = [NSValue valueWithPointer: object];
 	NSNumber* refID = [embeddedObjects objectForKey: key];

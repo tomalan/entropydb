@@ -123,6 +123,20 @@
 				}
 			}
 			return value;
+		} else if ([type isEqual: @"set"] == YES) {
+			NSArray* elements = [propertyElement elementsWithName: @"XSObject"];
+			NSMutableSet* value = [NSMutableSet setWithCapacity: [elements count]];
+			for (EXXMLElement* element in elements) {
+				NSString* refID = [element attributeWithName: @"refID"];
+				if (refID != nil) {
+					[value addObject: [[[XSObjectReference alloc] initWithID: [refID intValue]] autorelease]];
+				} else {
+					XSDecoder* decoder = [XSDecoder XMLDecoderWithElement: element attributes: attributes];
+					id obj = [[self composer] composeObjectWithDecoder: decoder];
+					[value addObject: obj];
+				}
+			}
+			return value;
 		} else {
 			NSString* refID = [propertyElement attributeWithName: @"refID"];
 			if (refID != nil) {
