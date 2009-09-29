@@ -1,9 +1,8 @@
 //
 //  EXXMLParser.m
-//  CRo
-//
-//  Created by Petr Homola on 17.10.08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
+//  XS package (serializer)
+//  (C) 2007-2009 Codesign
+//  Licensed under LGPL (v3)
 //
 
 #import "EXXMLParser.h"
