@@ -27,12 +27,44 @@
 			} else if ([type isEqual: @"I"]) {
 				unsigned value = *(unsigned*)((void*)obj + ivar_getOffset(*ivar));
 				[encoder encodeIntProperty: value];
+			} else if ([type isEqual: @"l"]) {
+				long value = *(long*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeLongProperty: value];
+			} else if ([type isEqual: @"L"]) {
+				unsigned long value = *(unsigned long*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeLongProperty: value];
+			} else if ([type isEqual: @"s"]) {
+				short value = *(short*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeShortProperty: value];
+			} else if ([type isEqual: @"S"]) {
+				unsigned short value = *(unsigned short*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeShortProperty: value];
+			} else if ([type isEqual: @"c"]) {
+				char value = *(char*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeCharProperty: value];
+			} else if ([type isEqual: @"C"]) {
+				unsigned char value = *(unsigned char*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeCharProperty: value];
+			} else if ([type isEqual: @"q"]) {
+				long long value = *(long long*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeLongLongProperty: value];
+			} else if ([type isEqual: @"Q"]) {
+				unsigned long long value = *(unsigned long long*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeLongLongProperty: value];
+			} else if ([type isEqual: @"f"]) {
+				float value = *(float*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeFloatProperty: value];
+			} else if ([type isEqual: @"d"]) {
+				double value = *(double*)((void*)obj + ivar_getOffset(*ivar));
+				[encoder encodeDoubleProperty: value];
 			} else if ([type characterAtIndex: 0] == '@') {
 				id value = object_getIvar(obj, *ivar);
 				if (value == nil) {
 					[encoder encodeNilProperty];
 				} else if ([value isKindOfClass: [NSString class]]) {
 					[encoder encodeStringProperty: value];
+				} else if ([value isKindOfClass: [NSArray class]]) {
+					[encoder encodeArrayProperty: value];
 				} else {
 					[encoder encodeEmbeddedObject: value];
 				}
