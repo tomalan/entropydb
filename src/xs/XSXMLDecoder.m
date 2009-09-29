@@ -8,6 +8,9 @@
 #import "XSXMLDecoder.h"
 #import "XSComposer.h"
 #import "XSObjectReference.h"
+#import "XSXMLObjectProxy.h"
+
+#define USE_PROXY	1
 
 @implementation XSXMLDecoder
 
@@ -117,8 +120,14 @@
 				if (refID != nil) {
 					[value addObject: [[[XSObjectReference alloc] initWithID: [refID intValue]] autorelease]];
 				} else {
+#ifdef USE_PROXY
+					XSXMLObjectProxy* obj = [[[XSXMLObjectProxy alloc] initWithXMLElement: element
+																				 composer: [self composer]
+																			   attributes: attributes] autorelease];
+#else
 					XSDecoder* decoder = [XSDecoder XMLDecoderWithElement: element attributes: attributes];
 					id obj = [[self composer] composeObjectWithDecoder: decoder];
+#endif
 					[value addObject: obj];
 				}
 			}
@@ -131,8 +140,14 @@
 				if (refID != nil) {
 					[value addObject: [[[XSObjectReference alloc] initWithID: [refID intValue]] autorelease]];
 				} else {
+#ifdef USE_PROXY
+					XSXMLObjectProxy* obj = [[[XSXMLObjectProxy alloc] initWithXMLElement: element
+																				 composer: [self composer]
+																			   attributes: attributes] autorelease];
+#else
 					XSDecoder* decoder = [XSDecoder XMLDecoderWithElement: element attributes: attributes];
 					id obj = [[self composer] composeObjectWithDecoder: decoder];
+#endif
 					[value addObject: obj];
 				}
 			}
@@ -142,9 +157,15 @@
 			if (refID != nil) {
 				return [[[XSObjectReference alloc] initWithID: [refID intValue]] autorelease];
 			} else {
+#ifdef USE_PROXY
+				XSXMLObjectProxy* obj = [[[XSXMLObjectProxy alloc] initWithXMLElement: [propertyElement firstElementWithName: @"XSObject"]
+																			 composer: [self composer]
+																		   attributes: attributes] autorelease];
+#else
 				XSDecoder* decoder = [XSDecoder XMLDecoderWithElement: [propertyElement firstElementWithName: @"XSObject"]
 														   attributes: attributes];
 				id obj = [[self composer] composeObjectWithDecoder: decoder];
+#endif
 				return obj;
 			}
 		}

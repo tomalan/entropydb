@@ -8,6 +8,7 @@
 #import <objc/runtime.h>
 #import "XSComposer.h"
 #import "XSObjectReference.h"
+#import "XSXMLObjectProxy.h"
 
 @implementation XSComposer
 
@@ -19,10 +20,14 @@
 }
 
 - (id)composeObjectWithDecoder:(XSDecoder*)decoder {
+	return [self composeObjectWithDecoder: decoder forceInitialization: NO];
+}
+
+- (id)composeObjectWithDecoder:(XSDecoder*)decoder forceInitialization:(BOOL)forceInitialization {
 	int ID = [decoder objectID];
 	NSNumber* key = [NSNumber numberWithInt: ID];
 	id obj = [embeddedObjects objectForKey: key];
-	if (obj == nil) {
+	if (forceInitialization == YES || obj == nil) {
 		Class cls = NSClassFromString([decoder objectClassName]);
 		obj = [[[cls alloc] init] autorelease];
 		[embeddedObjects setObject: obj forKey: key];
@@ -71,14 +76,20 @@
 					*(double*)((void*)obj + ivar_getOffset(*ivar)) = value;
 				} else if ([type characterAtIndex: 0] == '@') {
 					id value = [decoder decodeObjectProperty: name];
-					if ([value isKindOfClass: [XSObjectReference class]]) {
+					if ([value respondsToSelector: @selector(__refID)]) {
+						NSNumber* key = [NSNumber numberWithInt: [value __refID]];
+						[embeddedObjects setObject: value forKey: key];
+					} else if ([value isKindOfClass: [XSObjectReference class]]) {
 						NSNumber* key = [NSNumber numberWithInt: [value refID]];
 						value = [embeddedObjects objectForKey: key];
 					} else if ([value isKindOfClass: [NSArray class]]) {
 						NSArray* oldArray = value;
 						value = [NSMutableArray arrayWithCapacity: [oldArray count]];
 						for (id obj in oldArray) {
-							if ([obj isKindOfClass: [XSObjectReference class]]) {
+							if ([obj respondsToSelector: @selector(__refID)]) {
+								NSNumber* key = [NSNumber numberWithInt: [obj __refID]];
+								[embeddedObjects setObject: obj forKey: key];
+							} else if ([obj isKindOfClass: [XSObjectReference class]]) {
 								NSNumber* key = [NSNumber numberWithInt: [obj refID]];
 								obj = [embeddedObjects objectForKey: key];
 							}
@@ -88,7 +99,10 @@
 						NSSet* oldSet = value;
 						value = [NSMutableSet setWithCapacity: [oldSet count]];
 						for (id obj in oldSet) {
-							if ([obj isKindOfClass: [XSObjectReference class]]) {
+							if ([obj respondsToSelector: @selector(__refID)]) {
+								NSNumber* key = [NSNumber numberWithInt: [obj __refID]];
+								[embeddedObjects setObject: obj forKey: key];
+							} else if ([obj isKindOfClass: [XSObjectReference class]]) {
 								NSNumber* key = [NSNumber numberWithInt: [obj refID]];
 								obj = [embeddedObjects objectForKey: key];
 							}

@@ -13,5 +13,6 @@
 }
 
 - (id)composeObjectWithDecoder:(XSDecoder*)decoder;
+- (id)composeObjectWithDecoder:(XSDecoder*)decoder forceInitialization:(BOOL)forceInitialization;
 
 @end

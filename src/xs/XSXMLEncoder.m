@@ -16,11 +16,11 @@
 }
 
 - (void)startObject:(id)obj {
-	[[self XMLString] appendFormat: @"\t<XSObject id=\"%d\" class=\"%@\">\n", nextFreeObjectID++, [obj className]];
+	[[self XMLString] appendFormat: @"<XSObject id=\"%d\" class=\"%@\">\n", nextFreeObjectID++, [obj className]];
 }
 
-- (void)finishObject:(id)obj {
-	[[self XMLString] appendString: @"\t</XSObject>\n"];
+- (void)finishObject {
+	[[self XMLString] appendString: @"</XSObject>\n"];
 }
 
 - (void)startEncoding {
@@ -33,7 +33,7 @@
 }
 
 - (void)startProperty:(NSString*)name {
-	[[self XMLString] appendFormat: @"\t\t<XSProperty name=\"%@\" ", name];
+	[[self XMLString] appendFormat: @"<XSProperty name=\"%@\" ", name];
 }
 
 - (void)finishProperty {

@@ -14,5 +14,6 @@
 + (NSString*)serializeObjectToXMLString:(id)obj;
 + (BOOL)serializeObject:(id)obj toFile:(NSString*)path;
 + (id)deserializeObjectFromXMLString:(NSString*)XMLAsString;
++ (id)deserializeObjectFromXMLFile:(NSString*)path;
 
 @end

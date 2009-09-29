@@ -1,9 +1,9 @@
 //
 //  XSPredicateInspector.m
-//  test
-//
-//  Created by Petr Homola on 29.9.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  XSHelper.h
+//  XS package (serializer)
+//  (C) 2007-2009 Codesign
+//  Licensed under LGPL (v3)
 //
 
 #import "XSPredicateInspector.h"
