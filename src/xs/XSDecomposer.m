@@ -7,10 +7,12 @@
 
 #import <objc/runtime.h>
 #import "XSDecomposer.h"
+#import "XSObjectProxy.h"
 
 @implementation XSDecomposer
 
 - (void)decomposeObject:(id)obj encoder:(XSEncoder*)encoder {
+	if ([obj respondsToSelector: @selector(__object)]) obj = [obj __object]; // is the object an XS proxy?
 	[encoder startObject: obj];
 	Class cls = [obj class];
 	while (cls != [NSObject class]) {
