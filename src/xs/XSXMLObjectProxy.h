@@ -9,16 +9,15 @@
 #import <Cocoa/Cocoa.h>
 #import "EXXMLElement.h"
 #import "XSComposer.h"
+#import "XSObjectProxy.h"
 
-@interface XSXMLObjectProxy : NSObject {
+@interface XSXMLObjectProxy : XSObjectProxy {
 	EXXMLElement* XMLElement;
 	XSComposer* composer;
 	NSDictionary* attributes;
-	id object;
 }
 
 - (id)initWithXMLElement:(EXXMLElement*)element composer:(XSComposer*)_composer attributes:(NSDictionary*)_attributes;
-- (id)__object;
 - (int)__refID;
 
 @end
