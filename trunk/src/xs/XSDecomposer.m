@@ -69,8 +69,8 @@
 					[encoder encodeArrayProperty: value];
 				} else if ([value isKindOfClass: [NSSet class]]) {
 					[encoder encodeSetProperty: value];
-				//} else if ([value isKindOfClass: [NSDictionary class]]) {
-				//	[encoder encodeDictionaryProperty: value];
+				} else if ([value isKindOfClass: [NSDictionary class]]) {
+					[encoder encodeDictionaryProperty: value];
 				} else {
 					[encoder encodeEmbeddedObject: value];
 				}
