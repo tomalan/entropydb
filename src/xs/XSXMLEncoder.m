@@ -91,6 +91,34 @@
 	}
 }
 
+- (void)encodeDictionaryProperty:(NSDictionary*)dict {
+	[[self XMLString] appendFormat: @"type=\"dictionary\" mutable=\"%d\">\n", [dict isKindOfClass: [NSMutableDictionary class]]];
+	for (id entryKey in [dict allKeys]) {
+		[[self XMLString] appendString: @"<XSEntry>\n"];
+		
+		NSValue* key = [NSValue valueWithPointer: entryKey];
+		NSNumber* refID = [embeddedObjects objectForKey: key];
+		if (refID == nil) {
+			[embeddedObjects setObject: [NSNumber numberWithInt: nextFreeObjectID] forKey: key];
+			[[self decomposer] decomposeObject: entryKey encoder: self];
+		} else {
+			[[self XMLString] appendFormat: @"<XSObject refID=\"%@\"/>\n", refID];
+		}
+		
+		id entryValue = [dict objectForKey: entryKey];
+		key = [NSValue valueWithPointer: entryValue];
+		refID = [embeddedObjects objectForKey: key];
+		if (refID == nil) {
+			[embeddedObjects setObject: [NSNumber numberWithInt: nextFreeObjectID] forKey: key];
+			[[self decomposer] decomposeObject: entryValue encoder: self];
+		} else {
+			[[self XMLString] appendFormat: @"<XSObject refID=\"%@\"/>\n", refID];
+		}
+		
+		[[self XMLString] appendString: @"</XSEntry>\n"];
+	}
+}
+
 - (void)encodeSetProperty:(NSSet*)set {
 	[[self XMLString] appendFormat: @"type=\"set\" mutable=\"%d\">\n", [set isKindOfClass: [NSMutableSet class]]];
 	for (id object in set) {

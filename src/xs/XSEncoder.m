@@ -57,6 +57,8 @@
 
 - (void)encodeArrayProperty:(NSArray*)array { }
 
+- (void)encodeDictionaryProperty:(NSDictionary*)dict { }
+
 - (void)encodeSetProperty:(NSSet*)set { }
 
 - (void)encodeEmbeddedObject:(id)object { }
