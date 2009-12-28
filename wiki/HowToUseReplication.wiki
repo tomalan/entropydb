@@ -11,7 +11,7 @@ If you would like an instance of _EXContainer_ to provide its contents to other 
 
 A local database instance of _EXContainer_ (typically on a mobile device) can synchronize its contents with a server database instance by using the method _synchronizeWithPort:host:_.
 
-*Important:* Only descendants of _EXSharedObject_ which provide _encodeWithCoder:_ oder _initWithCoder:_ can be synchronized among database instances.
+*Important:* Only descendants of _EXSharedObject_ which provide _encodeWithCoder:_ or _initWithCoder:_ can be synchronized among database instances.
 
 == Delegates ==
 
