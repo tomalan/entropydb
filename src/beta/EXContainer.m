@@ -139,7 +139,7 @@
 	if (atomically == YES) {
 		[self autoreleaseDrainer];
 		[self lockForTransaction];
-		[self executeSQL: @"BEGIN TRANSACTION" raiseExceptionOnFailure: YES];
+		[self executeSQL: @"BEGIN EXCLUSIVE TRANSACTION" raiseExceptionOnFailure: YES];
 	}
 	@try {
 		if ([object isKindOfClass: [EXSharedObject class]]) {
@@ -212,7 +212,7 @@
 		if (atomically == YES) {
 			[self autoreleaseDrainer];
 			[self lockForTransaction];
-			[self executeSQL: @"BEGIN TRANSACTION" raiseExceptionOnFailure: YES];
+			[self executeSQL: @"BEGIN EXCLUSIVE TRANSACTION" raiseExceptionOnFailure: YES];
 		}
 		@try {
 			[self executeSQL: [NSString stringWithFormat: @"UPDATE objects SET published = 0 WHERE oid = %@", objectID] raiseExceptionOnFailure: YES];
@@ -480,7 +480,7 @@
 - (NSArray*)queryWithClass:(Class)cls lazyLoading:(BOOL)lazyLoading {
 	[self autoreleaseDrainer];
 	[self lockForTransaction];
-	[self executeSQL: @"BEGIN TRANSACTION" raiseExceptionOnFailure: YES];
+	[self executeSQL: @"BEGIN EXCLUSIVE TRANSACTION" raiseExceptionOnFailure: YES];
 	NSMutableDictionary* retrievedObjects = [[NSMutableDictionary alloc] init];
 	@try {
 		NSMutableArray* resultSet = [NSMutableArray array];
@@ -554,7 +554,7 @@
 	if (atomically) {
 		[self autoreleaseDrainer];
 		[self lockForTransaction];
-		[self executeSQL: @"BEGIN TRANSACTION" raiseExceptionOnFailure: YES];
+		[self executeSQL: @"BEGIN EXCLUSIVE TRANSACTION" raiseExceptionOnFailure: YES];
 	}
 	@try {
 		//NSString* className = NSStringFromClass(cls);
@@ -678,7 +678,7 @@
 	if (atomically == YES) {
 		[self autoreleaseDrainer];
 		[self lockForTransaction];
-		[self executeSQL: @"BEGIN TRANSACTION" raiseExceptionOnFailure: YES];
+		[self executeSQL: @"BEGIN EXCLUSIVE TRANSACTION" raiseExceptionOnFailure: YES];
 	}
 	@try {
 		id object = nil;

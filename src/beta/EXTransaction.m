@@ -19,7 +19,7 @@
 		}
 		container = [_container retain];
 		[container lockForTransaction];
-		[container executeSQL: @"BEGIN TRANSACTION"];
+		[container executeSQL: @"BEGIN EXCLUSIVE TRANSACTION"];
 		storedObjects = [[NSMutableDictionary alloc] init];
 	}
 	return self;
