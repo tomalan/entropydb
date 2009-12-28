@@ -1,9 +1,0 @@
-#summary Differences between Entropy v1.2 and Entropy v2.0
-#labels Featured,Phase-Design
-
-|| *Feature* || *Entropy v1.2* || *Entropy v2.0* ||
-|| License || LGPL || GPL ||
-|| Backend || relational || post-relational ||
-|| Persistable objects || subclasses of _NSObject_ || classes conforming to _EXMappableObject_ ||
-|| Optimized queries || via _EXPredicate_ || native queries ||
-|| Supported OS || OS X 10.5+/iPhone || OS X 10.6 ||
