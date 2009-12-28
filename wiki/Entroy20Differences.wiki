@@ -1,0 +1,5 @@
+#summary Differences between Entropy v1.2 and Entropy v2.0
+#labels Featured,Phase-Design
+
+|| *Feature* || *Entropy v1.2* || *Entropy v2.0* ||
+|| License || LGPL || GPL ||
