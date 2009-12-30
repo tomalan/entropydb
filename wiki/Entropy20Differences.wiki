@@ -8,4 +8,4 @@
 || Optimized queries || via _EXPredicate_ || _EXPredicate_/native queries ||
 || lazy loading || no || yes ||
 || replication || no || yes ||
-|| Supported OS || OS X 10.5+/iPhone || OS X 10.6 ||
+|| Supported OS || OS X 10.5+/iPhone OS || OS X 10.6 ||
