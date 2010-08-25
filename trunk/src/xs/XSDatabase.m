@@ -23,7 +23,7 @@
 }
 
 - (NSArray*)queryWithClass:(Class)cls {
-	XSComposer* composer = [[[XSComposer alloc] init] autorelease];
+	//XSComposer* composer = [[[XSComposer alloc] init] autorelease];
 	//NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 	//							composer, kXSComposerAttribute, nil];
 	

@@ -2,7 +2,7 @@
 //  EXObjectStore.h
 //  Linq
 //
-//  Created by Petr Homola on 28.12.09.
+//  Created by PH on 28.12.09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
