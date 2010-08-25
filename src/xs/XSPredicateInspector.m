@@ -47,7 +47,7 @@
 			}
 			[code appendString: @")"];
 			return YES;
-		}
+		} else NSLog(@"Unknown compound type");
 	} else if ([predicate isKindOfClass: [NSComparisonPredicate class]]) {
 		if ([predicate predicateOperatorType] == NSEqualToPredicateOperatorType
 			&& [predicate comparisonPredicateModifier] == NSDirectPredicateModifier
@@ -98,7 +98,7 @@
 			[code appendString: @" >= "];
 			if ([self inspectExpression: [predicate rightExpression] code: code arguments: arguments] == NO) return NO;
 			return YES;
-		}
+		} else NSLog(@"Unknown operator type");
 	}
 	return NO;
 }
@@ -110,10 +110,10 @@
 		return YES;
 	} else if ([expression expressionType] == NSKeyPathExpressionType) {
 		NSString* keyPath = [expression keyPath];
-		if ([keyPath rangeOfString: @"."].location != NSNotFound) return NO;
+		//if ([keyPath rangeOfString: @"."].location != NSNotFound) return NO;
 		[code appendFormat: @"%@", keyPath];
 		return YES;
-	}
+	} else NSLog(@"Unknown expression type");
 	return NO;
 }
 

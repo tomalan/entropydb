@@ -498,7 +498,7 @@
 			NSNumber* objectID = [NSNumber numberWithInt: sqlite3_column_int(stmt, 0)];
 			int versionID = sqlite3_column_int(stmt, 1);
 			char* _className = (char*) sqlite3_column_text(stmt, 2);
-			NSString* className = [[NSString alloc] initWithUTF8String: _className];
+			NSString* className = [[[NSString alloc] initWithUTF8String: _className] autorelease];
 			id object = [[NSClassFromString(className) alloc] autorelease];
 			[decomposer composeObject: object withObjectID: objectID versionID: versionID retrievedObjects: retrievedObjects lazyLoading: lazyLoading];
 			NSValue* key = [NSValue valueWithPointer: object];
@@ -577,7 +577,7 @@
 				NSNumber* objectID = [NSNumber numberWithInt: sqlite3_column_int(stmt, 0)];
 				int versionID = sqlite3_column_int(stmt, 1);
 				char* _className = (char*) sqlite3_column_text(stmt, 2);
-				NSString* className = [[NSString alloc] initWithUTF8String: _className];
+				NSString* className = [[[NSString alloc] initWithUTF8String: _className] autorelease];
 				id object = [[NSClassFromString(className) alloc] autorelease];
 				[decomposer composeObject: object withObjectID: objectID versionID: versionID retrievedObjects: retrievedObjects lazyLoading: lazyLoading];
 				NSValue* key = [NSValue valueWithPointer: object];
@@ -603,7 +603,7 @@
 				NSNumber* objectID = [NSNumber numberWithInt: sqlite3_column_int(stmt, 0)];
 				int versionID = sqlite3_column_int(stmt, 1);
 				char* _className = (char*) sqlite3_column_text(stmt, 2);
-				NSString* className = [[NSString alloc] initWithUTF8String: _className];
+				NSString* className = [[[NSString alloc] initWithUTF8String: _className] autorelease];
 				id object = [[NSClassFromString(className) alloc] autorelease];
 				[decomposer composeObject: object withObjectID: objectID versionID: versionID retrievedObjects: retrievedObjects lazyLoading: lazyLoading];
 				NSValue* key = [NSValue valueWithPointer: object];
@@ -626,7 +626,7 @@
 				NSNumber* objectID = [NSNumber numberWithInt: sqlite3_column_int(stmt, 0)];
 				int versionID = sqlite3_column_int(stmt, 1);
 				char* _className = (char*) sqlite3_column_text(stmt, 2);
-				NSString* className = [[NSString alloc] initWithUTF8String: _className];
+				NSString* className = [[[NSString alloc] initWithUTF8String: _className] autorelease];
 				id object = [NSClassFromString(className) alloc];
 				[decomposer composeObject: object withObjectID: objectID versionID: versionID retrievedObjects: retrievedObjects lazyLoading: lazyLoading];
 				if ([predicate evaluateWithObject: object] == YES) {
